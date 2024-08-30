@@ -7,10 +7,12 @@ class Assets {
   static const String fontsSatoshiLight = 'assets/fonts/Satoshi-Light.ttf';
   static const String fontsSatoshiMedium = 'assets/fonts/Satoshi-Medium.ttf';
   static const String fontsSatoshiRegular = 'assets/fonts/Satoshi-Regular.ttf';
-  static const String imagesAuthImageBottom = 'assets/images/auth_image_bottom.png';
   static const String imagesAppLogo = 'assets/images/app_logo.svg';
+  static const String imagesAuthImageBottom = 'assets/images/auth_image_bottom.png';
   static const String imagesGetStartedBg1 = 'assets/images/get_started_bg_1.png';
   static const String imagesGetStartedBg2 = 'assets/images/get_started_bg_2.png';
+  static const String vectorsApple = 'assets/vectors/apple.svg';
+  static const String vectorsGoogle = 'assets/vectors/google.svg';
   static const String vectorsMoon = 'assets/vectors/moon.svg';
   static const String vectorsPatternAuthBottom = 'assets/vectors/pattern_auth_bottom.svg';
   static const String vectorsPatternAuthTop = 'assets/vectors/pattern_auth_top.svg';

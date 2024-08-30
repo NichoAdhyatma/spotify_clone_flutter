@@ -6,6 +6,7 @@ class AppPallete {
   static const darkBackground = Color(0xFF1C1B1B);
   static const grey = Color(0xFFBEBEBE);
   static const textGrey = Color(0xFF797979);
+  static const textBlack = Color(0xFF383838);
   static const darkGrey = Color(0xFF343434);
   static const white = Color(0xFFFFFFFF);
   static const textWhite = Color(0xFFF6F6F6);

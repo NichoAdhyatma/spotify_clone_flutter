@@ -34,7 +34,6 @@ class MyApp extends StatelessWidget {
       ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, state) {
-          print(state);
           return MaterialApp(
             title: 'Flutter Demo',
             theme: AppTheme.lightTheme,
