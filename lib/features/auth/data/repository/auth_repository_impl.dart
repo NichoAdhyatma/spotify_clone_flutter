@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:spotify_clone/core/common/entities/user_entitiy.dart';
 import 'package:spotify_clone/core/error/exception.dart';
 import 'package:spotify_clone/core/error/failure.dart';
 import 'package:spotify_clone/features/auth/data/datasources/auth_firebase_service.dart';
 import 'package:spotify_clone/features/auth/data/models/create_user_request.dart';
-import 'package:spotify_clone/features/auth/domain/entities/user.dart';
 import 'package:spotify_clone/features/auth/domain/repository/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {

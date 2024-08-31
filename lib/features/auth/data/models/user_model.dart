@@ -1,4 +1,4 @@
-import 'package:spotify_clone/features/auth/domain/entities/user.dart';
+import 'package:spotify_clone/core/common/entities/user_entitiy.dart';
 
 class UserModel extends UserEntity {
   UserModel({

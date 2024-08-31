@@ -10,22 +10,13 @@ abstract class AuthFirebaseService {
 }
 
 class AuthFirebaseServiceImpl implements AuthFirebaseService {
-  @override
-  Future<UserModel> signUp(CreateUserRequest user) async {
+  Future<UserModel> _authAction(Future<UserCredential> Function() fn) async {
     try {
-      print("User: $user");
-
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: user.email,
-        password: user.password,
-      );
+      final credential = await fn();
 
       if (credential.user == null) {
         throw const ServerException("User is null!");
       }
-
-      await credential.user?.updateDisplayName(user.name);
 
       return UserModel(
         id: credential.user?.uid ?? "",
@@ -38,31 +29,31 @@ class AuthFirebaseServiceImpl implements AuthFirebaseService {
       throw ServerException(e.message ?? "An error occurred");
     }
   }
+
+  @override
+  Future<UserModel> signUp(CreateUserRequest user) async => _authAction(
+        () async {
+          final credential =
+              await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: user.email,
+            password: user.password,
+          );
+
+          await credential.user?.updateDisplayName(user.name);
+
+          return credential;
+        },
+      );
 
   @override
   Future<UserModel> signIn({
     required String email,
     required String password,
-  }) async {
-    try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
+  }) async =>
+      _authAction(
+        () async => await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        ),
       );
-
-      if (credential.user == null) {
-        throw const ServerException("User is null!");
-      }
-
-      return UserModel(
-        id: credential.user?.uid ?? "",
-        email: credential.user?.email ?? "",
-        name: credential.user?.displayName ?? "",
-      );
-    } on ServerException catch (e) {
-      throw ServerException(e.message);
-    } on FirebaseAuthException catch (e) {
-      throw ServerException(e.message ?? "An error occurred");
-    }
-  }
 }

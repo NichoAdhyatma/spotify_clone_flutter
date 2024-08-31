@@ -1,6 +1,6 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:spotify_clone/core/common/entities/user_entitiy.dart';
 import 'package:spotify_clone/core/error/failure.dart';
-import 'package:spotify_clone/features/auth/domain/entities/user.dart';
 
 abstract class AuthRepository {
   Future<Either<Failure, UserEntity>> signUp({

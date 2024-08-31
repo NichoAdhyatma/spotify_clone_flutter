@@ -1,14 +1,16 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:spotify_clone/core/common/entities/user_entitiy.dart';
 import 'package:spotify_clone/core/error/failure.dart';
-import 'package:spotify_clone/features/auth/domain/entities/user.dart';
+import 'package:spotify_clone/core/usecase/usecase.dart';
 import 'package:spotify_clone/features/auth/domain/repository/auth_repository.dart';
 
-class SignInUseCase {
+class SignInUseCase implements UseCase<UserEntity, SignInParams> {
   final AuthRepository authRepository;
 
   SignInUseCase({required this.authRepository});
 
-  Future<Either<Failure, UserEntity>> call(SignInParams params) async {
+  @override
+  Future<Either<Failure, UserEntity>> call(params) async {
     return await authRepository.signIn(
       email: params.email,
       password: params.password,
