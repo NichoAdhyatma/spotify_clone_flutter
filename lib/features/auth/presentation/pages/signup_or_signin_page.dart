@@ -7,7 +7,7 @@ import 'package:spotify_clone/core/utils/sizedbox_ext.dart';
 import 'package:spotify_clone/features/auth/presentation/pages/signup_page.dart';
 import 'package:spotify_clone/generated/assets.dart';
 
-import 'login_page.dart';
+import 'signin_page.dart';
 
 class SignupOrSigninPage extends StatelessWidget {
   static route() =>
@@ -75,7 +75,7 @@ class SignupOrSigninPage extends StatelessWidget {
                     Expanded(
                       child: TextButton(
                         onPressed: () {
-                          Navigator.of(context).push(LoginPage.route());
+                          Navigator.of(context).push(SignInPage.route());
                         },
                         child: Text(
                           "Login",

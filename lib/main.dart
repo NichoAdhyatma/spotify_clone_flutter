@@ -5,8 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:spotify_clone/core/theme/app_theme.dart';
+import 'package:spotify_clone/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:spotify_clone/features/splash/presentation/pages/splash_page.dart';
 import 'package:spotify_clone/firebase_options.dart';
+import 'package:spotify_clone/service_locator.dart';
 
 import 'features/intro/presentation/cubit/theme_cubit.dart';
 
@@ -21,6 +23,8 @@ void main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
+  await initializeDependencies();
+
   runApp(const MyApp());
 }
 
@@ -33,6 +37,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => ThemeCubit(),
+        ),
+        BlocProvider(
+          create: (context) => sl<AuthBloc>(),
         ),
       ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(

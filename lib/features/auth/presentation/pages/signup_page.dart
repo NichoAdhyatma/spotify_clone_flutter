@@ -1,18 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:spotify_clone/core/common/widgets/app_bar/basic_app_bar.dart';
 import 'package:spotify_clone/core/common/widgets/app_button.dart';
+import 'package:spotify_clone/core/common/widgets/loader/app_loader.dart';
 import 'package:spotify_clone/core/theme/app_pallete.dart';
+import 'package:spotify_clone/core/utils/show_snackbar.dart';
 import 'package:spotify_clone/core/utils/sizedbox_ext.dart';
-import 'package:spotify_clone/features/auth/presentation/pages/login_page.dart';
+import 'package:spotify_clone/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:spotify_clone/features/auth/presentation/pages/signin_page.dart';
+import 'package:spotify_clone/features/auth/presentation/widgets/auth_field.dart';
+import 'package:spotify_clone/features/root/presentation/root_page.dart';
 import 'package:spotify_clone/generated/assets.dart';
 
-class SignupPage extends StatelessWidget {
+class SignupPage extends StatefulWidget {
   static route() => MaterialPageRoute(
         builder: (context) => const SignupPage(),
       );
 
   const SignupPage({super.key});
+
+  @override
+  State<SignupPage> createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
+  final formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _nameController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,28 +64,38 @@ class SignupPage extends StatelessWidget {
               20.heightSB,
               _supportText(),
               35.heightSB,
-              const TextField(
-                decoration: InputDecoration(
-                  hintText: "Full Name",
-                ),
-              ),
-              20.heightSB,
-              const TextField(
-                decoration: InputDecoration(
-                  hintText: "Enter Email",
-                ),
-              ),
-              20.heightSB,
-              const TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  hintText: "Password",
-                ),
-              ),
+              _buildSignUpForm(),
               40.heightSB,
-              AppButton(
-                label: "Create Account",
-                onPressed: () {},
+              BlocConsumer<AuthBloc, AuthState>(
+                listener: (context, state) {
+                  if (state is AuthErrorState) {
+                    showSnackbar(context, state.message);
+                  }
+
+                  if (state is AuthSuccessState) {
+                    Navigator.of(context).pushAndRemoveUntil(
+                      RootPage.route(),
+                      (route) => false,
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  if (state is AuthLoadingState) {
+                    return const AppLoader();
+                  }
+                  return AppButton(
+                    label: "Create Account",
+                    onPressed: () {
+                      context.read<AuthBloc>().add(
+                            AuthSignUpEvent(
+                              email: _emailController.text,
+                              password: _passwordController.text,
+                              name: _nameController.text,
+                            ),
+                          );
+                    },
+                  );
+                },
               ),
               20.heightSB,
               _orDivider(),
@@ -89,6 +124,32 @@ class SignupPage extends StatelessWidget {
     );
   }
 
+  Form _buildSignUpForm() {
+    return Form(
+      key: formKey,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      child: Column(
+        children: [
+          AuthField(
+            controller: _nameController,
+            hintText: "Enter Name",
+          ),
+          20.heightSB,
+          AuthField(
+            controller: _emailController,
+            hintText: "Enter Email",
+          ),
+          20.heightSB,
+          AuthField(
+            controller: _passwordController,
+            obscureText: true,
+            hintText: "Enter Password",
+          ),
+        ],
+      ),
+    );
+  }
+
   Row _navigateText(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -103,7 +164,7 @@ class SignupPage extends StatelessWidget {
         GestureDetector(
           onTap: () {
             Navigator.of(context).pushReplacement(
-              LoginPage.route(),
+              SignInPage.route(),
             );
           },
           child: const Text(
