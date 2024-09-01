@@ -74,4 +74,5 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       (user) => _emitAuthSuccess(user, emit),
     );
   }
+
 }

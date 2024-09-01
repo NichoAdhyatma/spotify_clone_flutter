@@ -5,7 +5,7 @@ import 'package:spotify_clone/core/common/widgets/app_button.dart';
 import 'package:spotify_clone/core/theme/app_pallete.dart';
 import 'package:spotify_clone/core/utils/sizedbox_ext.dart';
 import 'package:spotify_clone/features/auth/presentation/pages/signup_or_signin_page.dart';
-import 'package:spotify_clone/features/intro/presentation/cubit/theme_cubit.dart';
+import 'package:spotify_clone/core/common/cubits/theme/theme_cubit.dart';
 import 'package:spotify_clone/features/intro/presentation/widgets/circle_blur_button.dart';
 import 'package:spotify_clone/features/intro/presentation/widgets/intro_layout.dart';
 import 'package:spotify_clone/generated/assets.dart';

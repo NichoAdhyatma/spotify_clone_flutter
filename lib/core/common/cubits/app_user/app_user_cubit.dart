@@ -33,6 +33,10 @@ class AppUserCubit extends Cubit<AppUserState> {
     );
   }
 
+  void signOut() async {
+    await _firebaseAuth.signOut();
+  }
+
   void updateUser(UserEntity? user) {
     if (user == null) {
       emit(AppUserGuest());

@@ -10,7 +10,7 @@ import 'package:spotify_clone/core/utils/sizedbox_ext.dart';
 import 'package:spotify_clone/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:spotify_clone/features/auth/presentation/pages/signup_page.dart';
 import 'package:spotify_clone/features/auth/presentation/widgets/auth_field.dart';
-import 'package:spotify_clone/features/root/presentation/root_page.dart';
+import 'package:spotify_clone/features/home/presentation/home_page.dart';
 import 'package:spotify_clone/generated/assets.dart';
 
 class SignInPage extends StatefulWidget {
@@ -69,7 +69,7 @@ class _SignInPageState extends State<SignInPage> {
                     showSnackbar(context, state.message);
                   } else if (state is AuthSuccessState) {
                     Navigator.of(context).pushReplacement(
-                      RootPage.route(),
+                      HomePage.route(),
                     );
                   }
                 },

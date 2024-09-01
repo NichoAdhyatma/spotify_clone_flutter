@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spotify_clone/core/error/exception.dart';
 import 'package:spotify_clone/features/auth/data/models/create_user_request.dart';
 import 'package:spotify_clone/features/auth/data/models/user_model.dart';
+import 'package:spotify_clone/service_locator.dart';
 
 abstract class AuthFirebaseService {
   Future<UserModel> signUp(CreateUserRequest user);
@@ -40,6 +42,16 @@ class AuthFirebaseServiceImpl implements AuthFirebaseService {
           );
 
           await credential.user?.updateDisplayName(user.name);
+
+          if (credential.user != null) {
+            sl<FirebaseFirestore>()
+                .collection('users')
+                .doc(credential.user?.uid)
+                .set({
+              'name': user.name,
+              'email': user.email,
+            });
+          }
 
           return credential;
         },

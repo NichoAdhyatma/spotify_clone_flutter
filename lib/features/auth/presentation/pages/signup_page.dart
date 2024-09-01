@@ -10,7 +10,7 @@ import 'package:spotify_clone/core/utils/sizedbox_ext.dart';
 import 'package:spotify_clone/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:spotify_clone/features/auth/presentation/pages/signin_page.dart';
 import 'package:spotify_clone/features/auth/presentation/widgets/auth_field.dart';
-import 'package:spotify_clone/features/root/presentation/root_page.dart';
+import 'package:spotify_clone/features/home/presentation/home_page.dart';
 import 'package:spotify_clone/generated/assets.dart';
 
 class SignupPage extends StatefulWidget {
@@ -74,7 +74,7 @@ class _SignupPageState extends State<SignupPage> {
 
                   if (state is AuthSuccessState) {
                     Navigator.of(context).pushAndRemoveUntil(
-                      RootPage.route(),
+                      HomePage.route(),
                       (route) => false,
                     );
                   }
@@ -100,21 +100,7 @@ class _SignupPageState extends State<SignupPage> {
               20.heightSB,
               _orDivider(),
               20.heightSB,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    Assets.vectorsGoogle,
-                    width: 30,
-                  ),
-                  40.widthSB,
-                  SvgPicture.asset(
-                    Assets.vectorsApple,
-                    width: 30,
-                  ),
-                ],
-              ),
+              const SocialLoginButton(),
               40.heightSB,
               _navigateText(context)
             ],
@@ -219,6 +205,31 @@ class _SignupPageState extends State<SignupPage> {
         fontSize: 25,
         fontWeight: FontWeight.bold,
       ),
+    );
+  }
+}
+
+class SocialLoginButton extends StatelessWidget {
+  const SocialLoginButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SvgPicture.asset(
+          Assets.vectorsGoogle,
+          width: 30,
+        ),
+        40.widthSB,
+        SvgPicture.asset(
+          Assets.vectorsApple,
+          width: 30,
+        ),
+      ],
     );
   }
 }
