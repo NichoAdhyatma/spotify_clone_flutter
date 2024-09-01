@@ -21,8 +21,6 @@ class AuthRepositoryImpl implements AuthRepository {
       return right(user);
     } on ServerException catch (e) {
       return left(Failure(e.message));
-    } on FirebaseAuthException catch (e) {
-      return left(Failure(e.message ?? "An error occurred"));
     }
   }
 

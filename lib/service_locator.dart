@@ -13,6 +13,10 @@ import 'features/auth/data/datasources/auth_firebase_service.dart';
 import 'features/auth/data/repository/auth_repository_impl.dart';
 import 'features/auth/domain/repository/auth_repository.dart';
 import 'features/auth/domain/usecases/signin_usecase.dart';
+import 'features/home/data/datasources/song_remote_datasource.dart';
+import 'features/home/data/repository/song_repository_impl.dart';
+import 'features/home/domain/repository/song_repository.dart';
+import 'features/home/domain/usecases/get_song_usecase.dart';
 import 'firebase_options.dart';
 
 final sl = GetIt.instance;
@@ -39,6 +43,8 @@ Future<void> initializeDependencies() async {
   );
 
   _initAuthFeature();
+
+  _initHomeFeature();
 }
 
 void _initAuthFeature() {
@@ -68,4 +74,28 @@ void _initAuthFeature() {
         appUserCubit: sl(),
       ),
     );
+}
+
+void _initHomeFeature() {
+  sl
+    ..registerFactory<SongRemoteDatasource>(
+      () => SongRemoteDatasourceImpl(
+        firestore: sl(),
+      ),
+    )
+    ..registerFactory<SongRepository>(
+      () => SongRepositoryImpl(
+        remoteDataSource: sl(),
+      ),
+    )
+    ..registerFactory(
+      () => GetSongUseCase(
+        songRepository: sl(),
+      ),
+    );
+  // ..registerLazySingleton(
+  //   () => HomeBloc(
+  //     getSongUseCase: sl(),
+  //   ),
+  // );
 }

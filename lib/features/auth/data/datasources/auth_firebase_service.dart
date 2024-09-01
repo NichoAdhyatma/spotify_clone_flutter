@@ -25,10 +25,10 @@ class AuthFirebaseServiceImpl implements AuthFirebaseService {
         email: credential.user?.email ?? "",
         name: credential.user?.displayName ?? "",
       );
-    } on ServerException catch (e) {
-      throw ServerException(e.message);
     } on FirebaseAuthException catch (e) {
       throw ServerException(e.message ?? "An error occurred");
+    } catch (e) {
+      throw ServerException(e.toString());
     }
   }
 
