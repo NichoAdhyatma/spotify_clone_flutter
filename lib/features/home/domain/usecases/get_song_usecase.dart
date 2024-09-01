@@ -4,10 +4,10 @@ import 'package:spotify_clone/core/usecase/usecase.dart';
 import 'package:spotify_clone/features/home/domain/entities/song_entity.dart';
 import 'package:spotify_clone/features/home/domain/repository/song_repository.dart';
 
-class GetSongUseCase implements UseCase<List<SongEntity>, NoParams> {
+class GetSongsUseCase implements UseCase<List<SongEntity>, NoParams> {
   final SongRepository _songRepository;
 
-  GetSongUseCase({
+  GetSongsUseCase({
     required SongRepository songRepository,
   }) : _songRepository = songRepository;
 

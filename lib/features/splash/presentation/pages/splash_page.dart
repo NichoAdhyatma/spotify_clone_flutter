@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:spotify_clone/core/common/cubits/app_user/app_user_cubit.dart';
-import 'package:spotify_clone/features/home/presentation/home_page.dart';
+import 'package:spotify_clone/features/home/presentation/pages/home_page.dart';
 import 'package:spotify_clone/features/splash/cubit/splash_redirect_cubit.dart';
 import 'package:spotify_clone/generated/assets.dart';
 import 'package:spotify_clone/features/intro/presentation/pages/get_started_page.dart';

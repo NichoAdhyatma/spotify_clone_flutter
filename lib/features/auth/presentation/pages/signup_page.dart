@@ -10,7 +10,7 @@ import 'package:spotify_clone/core/utils/sizedbox_ext.dart';
 import 'package:spotify_clone/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:spotify_clone/features/auth/presentation/pages/signin_page.dart';
 import 'package:spotify_clone/features/auth/presentation/widgets/auth_field.dart';
-import 'package:spotify_clone/features/home/presentation/home_page.dart';
+import 'package:spotify_clone/features/home/presentation/pages/home_page.dart';
 import 'package:spotify_clone/generated/assets.dart';
 
 class SignupPage extends StatefulWidget {

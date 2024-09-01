@@ -7,6 +7,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:spotify_clone/features/auth/domain/usecases/signup_usecase.dart';
 import 'package:spotify_clone/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:spotify_clone/features/home/presentation/bloc/news_cubit/news_cubit.dart';
 
 import 'core/common/cubits/app_user/app_user_cubit.dart';
 import 'features/auth/data/datasources/auth_firebase_service.dart';
@@ -89,13 +90,13 @@ void _initHomeFeature() {
       ),
     )
     ..registerFactory(
-      () => GetSongUseCase(
+      () => GetSongsUseCase(
         songRepository: sl(),
       ),
+    )
+    ..registerLazySingleton(
+      () => NewsCubit(
+        getSongsUseCase: sl(),
+      ),
     );
-  // ..registerLazySingleton(
-  //   () => HomeBloc(
-  //     getSongUseCase: sl(),
-  //   ),
-  // );
 }

@@ -1,14 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class SongEntity {
   final String title;
   final String artist;
-  final DateTime releaseDate;
+  final Timestamp releaseDate;
   final num duration;
+  final String cover;
+  final String songUrl;
 
   SongEntity({
     required this.title,
     required this.artist,
     required this.releaseDate,
     required this.duration,
+    required this.cover,
+    required this.songUrl,
   });
-
 }

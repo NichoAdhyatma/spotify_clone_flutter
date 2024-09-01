@@ -15,6 +15,7 @@ class SongRepositoryImpl implements SongRepository {
   @override
   Future<Either<Failure, List<SongEntity>>> getSongs() async {
     try {
+
       final songs = await remoteDataSource.getSongs();
 
       return right(songs);

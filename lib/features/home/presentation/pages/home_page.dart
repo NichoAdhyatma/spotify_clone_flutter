@@ -5,6 +5,8 @@ import 'package:spotify_clone/core/theme/app_pallete.dart';
 import 'package:spotify_clone/core/utils/sizedbox_ext.dart';
 import 'package:spotify_clone/generated/assets.dart';
 
+import '../widgets/news_songs.dart';
+
 class HomePage extends StatefulWidget {
   static route() => MaterialPageRoute(
         builder: (_) => const HomePage(),
@@ -49,6 +51,20 @@ class _HomePageState extends State<HomePage>
             _homeTopCard(),
             40.heightSB,
             _tabBar(),
+            20.heightSB,
+            SizedBox(
+              height: 300,
+              child: TabBarView(
+                controller: _tabController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: const [
+                  NewsSongs(),
+                  SizedBox(),
+                  SizedBox(),
+                  SizedBox(),
+                ],
+              ),
+            )
           ],
         ),
       ),

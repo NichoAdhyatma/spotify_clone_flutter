@@ -17,8 +17,10 @@ class SongRemoteDatasourceImpl implements SongRemoteDatasource {
     try {
       final query = await _firebaseFirestore
           .collection('songs')
-          .orderBy('releaseData', descending: true)
-          .limit(3)
+          .orderBy(
+            'releaseDate',
+            descending: true,
+          )
           .get();
 
       final songs = query.docs
