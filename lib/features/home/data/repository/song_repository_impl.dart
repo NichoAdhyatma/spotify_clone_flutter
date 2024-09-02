@@ -13,10 +13,20 @@ class SongRepositoryImpl implements SongRepository {
   });
 
   @override
-  Future<Either<Failure, List<SongEntity>>> getSongs() async {
+  Future<Either<Failure, List<SongEntity>>> getNewsSongs() async {
     try {
+      final songs = await remoteDataSource.getSongs(limit: 3);
 
-      final songs = await remoteDataSource.getSongs();
+      return right(songs);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<SongEntity>>> getPlaylistSongs() async {
+    try {
+      final songs = await remoteDataSource.getSongs(limit: 10);
 
       return right(songs);
     } on ServerException catch (e) {

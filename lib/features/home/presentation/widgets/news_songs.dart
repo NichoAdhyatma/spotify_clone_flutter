@@ -48,12 +48,46 @@ class NewsSongs extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: Image.network(
-                            song.cover,
-                            width: 160,
-                          ),
+                        Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: Image.network(
+                                song.cover,
+                                width: 160,
+                              ),
+                            ),
+                            Positioned(
+                              right: 0,
+                              bottom: 0,
+                              child: Transform.translate(
+                                offset: const Offset(10, 10),
+                                child: Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .tertiary
+                                        .withAlpha(180),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: IconButton(
+                                    icon: Icon(
+                                      Icons.play_arrow_rounded,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary
+                                          .withOpacity(
+                                            0.8,
+                                          ),
+                                    ),
+                                    onPressed: () {},
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                         10.heightSB,
                         Text(

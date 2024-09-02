@@ -3,7 +3,7 @@ import 'package:spotify_clone/core/error/exception.dart';
 import 'package:spotify_clone/features/home/data/models/song_model.dart';
 
 abstract class SongRemoteDatasource {
-  Future<List<SongModel>> getSongs();
+  Future<List<SongModel>> getSongs({int limit = 10});
 }
 
 class SongRemoteDatasourceImpl implements SongRemoteDatasource {
@@ -13,10 +13,11 @@ class SongRemoteDatasourceImpl implements SongRemoteDatasource {
       : _firebaseFirestore = firestore;
 
   @override
-  Future<List<SongModel>> getSongs() async {
+  Future<List<SongModel>> getSongs({int limit = 10}) async {
     try {
       final query = await _firebaseFirestore
           .collection('songs')
+          .limit(limit)
           .orderBy(
             'releaseDate',
             descending: true,

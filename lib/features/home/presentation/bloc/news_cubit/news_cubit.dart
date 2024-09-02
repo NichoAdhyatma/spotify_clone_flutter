@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_clone/core/usecase/usecase.dart';
 import 'package:spotify_clone/features/home/domain/entities/song_entity.dart';
-import 'package:spotify_clone/features/home/domain/usecases/get_song_usecase.dart';
+import 'package:spotify_clone/features/home/domain/usecases/get_news_songs_usecase.dart';
 
 part 'news_state.dart';
 
 class NewsCubit extends Cubit<NewsState> {
-  final GetSongsUseCase _getSongsUseCase;
+  final GetNewsSongsUseCase _getSongsUseCase;
 
-  NewsCubit({required GetSongsUseCase getSongsUseCase})
+  NewsCubit({required GetNewsSongsUseCase getSongsUseCase})
       : _getSongsUseCase = getSongsUseCase,
         super(NewsLoadingState());
 
